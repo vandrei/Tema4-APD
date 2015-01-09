@@ -3,3 +3,6 @@ build:
 
 clean:
 	rm -f RoutingTable\ -\ * a.out
+
+cleanOutput:
+	rm -f RoutingTable*

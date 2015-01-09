@@ -9,9 +9,9 @@
 #include "messages.h"
 
 void initMPIDataStructure() {
-    MPI_Datatype oldMessageTypes[2], oldDestinationTypes[1];
-    int messageBlockCounts[2], destinationBlockCounts[1];
-    MPI_Aint messageOffsets[2], destinationOffsets[1], extent;
+    MPI_Datatype oldMessageTypes[2];
+    int messageBlockCounts[2];
+    MPI_Aint messageOffsets[2], extent;
     
     // Define Message structure for MPI
     messageOffsets[0] = 0;
@@ -21,7 +21,7 @@ void initMPIDataStructure() {
     messageOffsets[1] = messageBlockCounts[0] * extent;
     oldMessageTypes[1] = MPI_CHAR;
     messageBlockCounts[1] = 255;
-    MPI_Type_struct(1, messageBlockCounts, messageOffsets, oldMessageTypes, &MPI_MESSAGE);
+    MPI_Type_struct(2, messageBlockCounts, messageOffsets, oldMessageTypes, &MPI_MESSAGE);
     MPI_Type_commit(&MPI_MESSAGE);
 }
 
@@ -50,13 +50,15 @@ int main (int argc, char **argv) {
         
         readNeighbours(topologyFile, &routingTable, pid);
         
-        //
-        //
         if (pid == 0) {
+//            printf("0 will send request stp\n");
             requestSTP(&routingTable, pid);
+  //          printf("0 will send topology\n");
             sendTopology(&routingTable, pid, UNKNOWN_BUNKER);
         } else {
+    //        printf("%d will start stp alg\n", pid);
             helpSTP(&routingTable, pid);
+      //      printf("%d will receive topology\n", pid);
             receiveTopology(&routingTable, pid);
         }
 

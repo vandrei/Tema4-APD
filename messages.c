@@ -22,6 +22,8 @@ Message *deserializeMessage(char *line) {
     return newMessage;
 }
 
+
+// OK
 Message *createStpRequestMessage(int source) {
     Message *message = (Message *)calloc(1, sizeof(Message));
     message->source = source;
@@ -31,6 +33,7 @@ Message *createStpRequestMessage(int source) {
     return message;
 }
 
+// OK
 Message *createStpReplyMessage(RoutingTable *routingTable, int source) {
     Message *message = (Message *)calloc(1, sizeof(Message));
     message->type = STP_REPLY;
@@ -48,6 +51,7 @@ Message *createStpReplyMessage(RoutingTable *routingTable, int source) {
 
     return message;
 }
+
 void addMessageToArray(MessageArray *messageArray, Message *message) {
     if (messageArray->count >= messageArray->allocatedSpace) {
         int newSize = messageArray->allocatedSpace + MESSAGE_ALLOCATION_CHUNK;
