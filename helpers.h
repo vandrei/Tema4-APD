@@ -42,6 +42,11 @@ typedef struct {
 
 typedef struct {
     int count;
+    MPI_Request reqs[200];
+} Requests;
+
+typedef struct {
+    int count;
     int allocatedSpace;
     Message **messages;
 } MessageArray;

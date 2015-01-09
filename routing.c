@@ -235,6 +235,18 @@ void requestSTP(RoutingTable *routingTable, int pid) {
     }
 }
 
+int countNeighbours(RoutingTable routingTable) {
+    int i;
+    int count;
+    for (i = 0; i < routingTable.count; i++) {
+        if (bunkerIsNeighbour(routingTable.bunkers[i])) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 void routeMessage(RoutingTable routingTable, Message *message, int tag) {
     if (message->destination == BROADCAST_DESTINATION) {
         MPI_Request reqs[routingTable.count];

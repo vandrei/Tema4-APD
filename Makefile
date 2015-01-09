@@ -4,5 +4,5 @@ build:
 clean:
 	rm -f RoutingTable* mesaje* a.out receivedMessages*
 
-cleanOutput:
-	rm -f RoutingTable*
+junk:
+	rm -f RoutingTable* mesaje* receivedMessage* file* logfile*

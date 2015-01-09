@@ -10,5 +10,6 @@ void receiveTopology(RoutingTable *routingTable, int pid);
 void requestSTP(RoutingTable *routingTable, int pid);
 void routeMessage(RoutingTable routingTable, Message *message, int tag); 
 BOOL bunkerIsNeighbour(Destination bunker);
+int countNeighbours(RoutingTable routingTable); 
 
 #endif
