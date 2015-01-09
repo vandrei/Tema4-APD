@@ -113,7 +113,6 @@ void readNeighbours(char *inputFilename, RoutingTable *routingTable, int myPid) 
         }
         sscanf(line, "%d", &pid);
         if (pid == myPid) {
-            printf("found my line\n");
             foundMyLine = TRUE;
         } else {
             free(line);
