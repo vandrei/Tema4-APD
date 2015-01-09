@@ -26,6 +26,9 @@ void initMPIDataStructure() {
 }
 
 void initConstantValues() {
+    START_COMMUNICATION_TAG = 1;
+    END_COMMUNICATION_TAG = 3;
+    COMMUNICATION_TAG = 2;
     BROADCAST_DESTINATION = 'B';
     UNKNOWN_ROUTE = -1;
     UNKNOWN_BUNKER = -1;
@@ -34,11 +37,11 @@ void initConstantValues() {
 }
 
 int main (int argc, char **argv) {
-
     MPI_Init(&argc, &argv);
         char *topologyFile = argv[1];
         char *messagesFile = argv[2];
         int pid;
+        int *communicatingBunkers;
         
         RoutingTable routingTable;
         MessageArray messageArray;
@@ -51,32 +54,34 @@ int main (int argc, char **argv) {
         readNeighbours(topologyFile, &routingTable, pid);
         
         if (pid == 0) {
-//            printf("0 will send request stp\n");
             requestSTP(&routingTable, pid);
-  //          printf("0 will send topology\n");
             sendTopology(&routingTable, pid, UNKNOWN_BUNKER);
         } else {
-    //        printf("%d will start stp alg\n", pid);
             helpSTP(&routingTable, pid);
-      //      printf("%d will receive topology\n", pid);
             receiveTopology(&routingTable, pid);
         }
 
+        communicatingBunkers = (int *)calloc(routingTable.count, sizeof(int));
+
         printRoutingTable(routingTable, pid);
         
-//        readMessages(messagesFile, &messageArray, pid);
+        readMessages(messagesFile, &messageArray, pid);
+        //printMessages(&messageArray, pid);
 
+
+    // ok until here
+    //
 // begin phase 2
-/*
-        sendStartingBroadcast();
-        receiveStartingBroadcasts();
+       
+       
+        sendStartingBroadcast(routingTable, pid, messageArray);
+        receiveStartingBroadcasts(communicatingBunkers, routingTable);
+
+        sendMessages(routingTable, &messageArray);
+        sendEndingBroadcast(routingTable, pid);
         
-        sendMessages(&messageArray);
-        receiveMessages();
-        
-        receiveEndingBroadcast();
-        sendEndingBroadcast();
- */       
+        receiveMessages(routingTable, &communicatingBunkers, pid);
+
     MPI_Finalize();
 
     return 0;

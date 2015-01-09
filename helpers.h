@@ -10,10 +10,18 @@ typedef enum {
     STP_REQUEST,
     STP_REPLY,
     BROADCAST_START,
+    BROADCAST_NONE,
     BROADCAST_STOP,
     INFORMATION,
     TOPOLOGY
 } MessageType;
+
+typedef enum {
+    NONE,
+    SENDING,
+    NO_MESSAGE,
+    DONE
+} BunkerState;
 
 typedef enum {
     FALSE = 0,
@@ -50,6 +58,9 @@ typedef struct {
 } RoutingTable;
 
 int BROADCAST_DESTINATION;
+int START_COMMUNICATION_TAG;
+int END_COMMUNICATION_TAG;
+int COMMUNICATION_TAG;
 int UNKNOWN_ROUTE;
 int UNKNOWN_BUNKER;
 int MESSAGE_ALLOCATION_CHUNK;

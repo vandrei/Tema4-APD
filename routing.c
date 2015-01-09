@@ -147,9 +147,9 @@ void printRoutingTable(RoutingTable routingTable, int pid) {
     fclose(outputFile);
 }
 
+// OK
 void parseTopologyMessage(Message *stpReply, int source, RoutingTable *routingTable) {
     StpReply *connections = (StpReply *)&stpReply->message;
-   printf("received from %d: %d connections\n", source, (int)connections->count);
     int i;
     for (i = 0; i < (int)connections->count; i++) {
         int bunker = (int)connections->neighbours[i];
@@ -157,6 +157,7 @@ void parseTopologyMessage(Message *stpReply, int source, RoutingTable *routingTa
     }
 }
 
+// OK
 void helpSTP(RoutingTable *routingTable, int pid) {
     Message stpRequest;
     MPI_Status sts;
@@ -175,14 +176,11 @@ void helpSTP(RoutingTable *routingTable, int pid) {
 
     // Obtain reply from children
     RoutingTable oldRoutingTable = *routingTable;
-    printf("%d --> children %d\n", oldRoutingTable.count);
     for (i = 0; i < oldRoutingTable.count; i++) {
         MPI_Status sts;
         if (oldRoutingTable.bunkers[i].nextHop != source) {
             Message stpReply;
             MPI_Recv(&stpReply, 1, MPI_MESSAGE, oldRoutingTable.bunkers[i].nextHop, 0, MPI_COMM_WORLD, &sts);
-    
-            printf("receiving from %d count = %d --> %d %d\n", pid, stpReply.message[0], stpReply.message[1], stpReply.message[2]);
             parseTopologyMessage(&stpReply, oldRoutingTable.bunkers[i].nextHop, routingTable);
         }
     }
@@ -193,6 +191,7 @@ void helpSTP(RoutingTable *routingTable, int pid) {
     free(stpReply);
 }
 
+// OK
 void sendTopology(RoutingTable *routingTable, int pid, int source) {
     int i;
     for (i = 0; i < routingTable->count; i++) {
@@ -206,6 +205,7 @@ void sendTopology(RoutingTable *routingTable, int pid, int source) {
     }
 }
 
+// OK
 void receiveTopology(RoutingTable *routingTable, int pid) {
     MPI_Status sts;
     Message receivedTopologyMessage;
@@ -217,11 +217,11 @@ void receiveTopology(RoutingTable *routingTable, int pid) {
     sendTopology(routingTable, pid, source);
 }
 
+// OK
 void requestSTP(RoutingTable *routingTable, int pid) {
     int i;
     Message *stpRequest = createStpRequestMessage(pid);
     for (i = 0; i < routingTable->count; i++) {
- //       printf("0 sent request to %d\n", routingTable->bunkers[i].nextHop);
         MPI_Send(stpRequest, 1, MPI_MESSAGE, routingTable->bunkers[i].nextHop, 0, MPI_COMM_WORLD);
     }
     free(stpRequest);
@@ -231,7 +231,34 @@ void requestSTP(RoutingTable *routingTable, int pid) {
     for (i = 0; i < oldRoutingTable.count; i++) {
         MPI_Status sts;
         MPI_Recv(&stpReply, 1, MPI_MESSAGE, oldRoutingTable.bunkers[i].nextHop, 0, MPI_COMM_WORLD, &sts);
-  //      printf("0 received reply from children\n");
         parseTopologyMessage(&stpReply, oldRoutingTable.bunkers[i].nextHop, routingTable);
+    }
+}
+
+void routeMessage(RoutingTable routingTable, Message *message, int tag) {
+    if (message->destination == BROADCAST_DESTINATION) {
+        MPI_Request reqs[routingTable.count];
+        int i;
+        for (i = 0; i <  routingTable.count; i++) {
+            if (bunkerIsNeighbour(routingTable.bunkers[i])) {
+                MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &reqs[i]);
+            }
+        }
+    } else {
+        BOOL foundDestination = FALSE;
+
+        int i;
+        while (i < routingTable.count && !foundDestination) {
+            if (routingTable.bunkers[i].nodeId == message->destination) {
+                foundDestination = TRUE;
+            } else {
+                i++;
+            }
+        }
+        
+        if (foundDestination) {
+            MPI_Request req;
+            MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &req);
+        }
     }
 }
