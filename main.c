@@ -36,6 +36,63 @@ void initConstantValues() {
     ROUTING_ALLOCATION_CHUNK = 20;
 }
 
+int findLeader(RoutingTable routingTable, int leader, int mainLeader) {
+    int receivedWakeups = 0;
+    
+    int neighours = countNeighbours(routingTable);
+    int recvNeighbours[neighbours];
+    int i = 0;
+
+    while (receivedWakeups < neighbours - 1) {
+        Message receivedMessage;
+        MPI_Status;
+        MPI_Recv(&receivedMessage, 1, MPI_MESSAGE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &sts);
+        recvNeighbours[i] = sts.MPI_SOURCE;
+        i++;
+        int recvLeader = receivedMessage.message[0];
+        if (recvLeader < leader) {
+            leader = recvLeader;
+        }
+    }
+
+    Message sendMessage;
+    sendMessage.message[0] = leader;
+    int destination = 0;
+    for (i = 0; i < routingTable.count; i++) {
+        if (bunkerIsNeighbour(routingTable.bunkers[i])) {
+            int j;
+            BOOL foundDestination = TRUE;
+            for (j = 0; j < neighbours - 1; j++) {
+                destination = neighbours[j];
+                if (routingTable.bunkers[i].nextHop == neighbours[j]) {
+                    foundDestination = FALSE;
+                    break;
+                }
+            }
+
+            if (foundDestination) {
+                break;
+            }
+        }
+    }
+
+    MPI_Send(&sendMessage, 1, MPI_MESSAGE, destination, 4, MPI_COMM_WORLD);
+
+    Message *resultMessage = (Message *)calloc(1, sizeof(Message));
+    MPI_Status sts;
+    MPI_Recv(resultMessage, 1, MPI_MESSAGE, destination, 4, MPI_COMM_WORLD, &sts);
+
+    if (resultMessage->message[0] < leader) {
+        leader = resultMessage->message[0];
+    } else {
+        resultMessage->message[0] = leader;
+    }
+
+    broadcastMessage(routingTable, resultMessage, 4, destination);
+// should use WAITALL
+    return leader;
+}
+
 int main (int argc, char **argv) {
     MPI_Init(&argc, &argv);
         char *topologyFile = argv[1];
