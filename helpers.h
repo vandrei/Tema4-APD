@@ -13,7 +13,8 @@ typedef enum {
     BROADCAST_NONE,
     BROADCAST_STOP,
     INFORMATION,
-    TOPOLOGY
+    TOPOLOGY,
+    LEADER_FINDER
 } MessageType;
 
 typedef enum {

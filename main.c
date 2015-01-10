@@ -36,19 +36,21 @@ void initConstantValues() {
     ROUTING_ALLOCATION_CHUNK = 20;
 }
 
-int findLeader(RoutingTable routingTable, int leader, int mainLeader) {
+int findLeader(RoutingTable routingTable, int pid, int mainLeader) {
     int receivedWakeups = 0;
+
+    int leader = pid;
     
-    int neighours = countNeighbours(routingTable);
+    int neighbours = countNeighbours(routingTable);
     int recvNeighbours[neighbours];
-    int i = 0;
 
     while (receivedWakeups < neighbours - 1) {
         Message receivedMessage;
-        MPI_Status;
-        MPI_Recv(&receivedMessage, 1, MPI_MESSAGE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &sts);
-        recvNeighbours[i] = sts.MPI_SOURCE;
-        i++;
+        MPI_Status sts;
+        MPI_Recv(&receivedMessage, 1, MPI_MESSAGE, MPI_ANY_SOURCE, 4, MPI_COMM_WORLD, &sts);
+        recvNeighbours[receivedWakeups] = sts.MPI_SOURCE;
+        receivedWakeups++;
+        
         int recvLeader = receivedMessage.message[0];
         if (recvLeader < leader) {
             leader = recvLeader;
@@ -58,21 +60,23 @@ int findLeader(RoutingTable routingTable, int leader, int mainLeader) {
     Message sendMessage;
     sendMessage.message[0] = leader;
     int destination = 0;
-    for (i = 0; i < routingTable.count; i++) {
-        if (bunkerIsNeighbour(routingTable.bunkers[i])) {
-            int j;
-            BOOL foundDestination = TRUE;
-            for (j = 0; j < neighbours - 1; j++) {
-                destination = neighbours[j];
-                if (routingTable.bunkers[i].nextHop == neighbours[j]) {
+    int i;
+    for (i = 0; i < neighbours - 1; i++) {
+        destination = recvNeighbours[i];
+        BOOL foundDestination = TRUE;
+
+        int j;
+        for (j = 0; j < routingTable.count; j++) {
+            if (bunkerIsNeighbour(routingTable.bunkers[j])) {
+                if (destination == routingTable.bunkers[j].nextHop) {
                     foundDestination = FALSE;
-                    break;
                 }
             }
+        }
+        
 
-            if (foundDestination) {
-                break;
-            }
+        if (foundDestination) {
+            break;
         }
     }
 
@@ -89,7 +93,7 @@ int findLeader(RoutingTable routingTable, int leader, int mainLeader) {
     }
 
     broadcastMessage(routingTable, resultMessage, 4, destination);
-// should use WAITALL
+    
     return leader;
 }
 
@@ -123,17 +127,19 @@ int main (int argc, char **argv) {
         printRoutingTable(routingTable, pid);
         
         readMessages(messagesFile, &messageArray, pid);
-        //printMessages(&messageArray, pid);
 
-        sendStartingBroadcast(routingTable, pid, messageArray);
-        receiveStartingBroadcasts(communicatingBunkers, routingTable, pid);
+//        sendStartingBroadcast(routingTable, pid, messageArray);
+//        receiveStartingBroadcasts(communicatingBunkers, routingTable, pid);
 
-        sendMessages(routingTable, &messageArray, pid);
-        sendEndingBroadcast(routingTable, pid);
+//        sendMessages(routingTable, &messageArray, pid);
+//        sendEndingBroadcast(routingTable, pid);
         
-        receiveMessages(routingTable, communicatingBunkers, pid);
+//        receiveMessages(routingTable, communicatingBunkers, pid);
 
         // phase 2 complete
+        //
+        int leader = findLeader(routingTable, pid, UNKNOWN_BUNKER);
+        printf("%0.2d My leader is %d\n");
 
     MPI_Finalize();
 
