@@ -238,7 +238,7 @@ void requestSTP(RoutingTable *routingTable, int pid) {
 // OK
 int countNeighbours(RoutingTable routingTable) {
     int i;
-    int count;
+    int count = 0;
     for (i = 0; i < routingTable.count; i++) {
         if (bunkerIsNeighbour(routingTable.bunkers[i])) {
             count++;
