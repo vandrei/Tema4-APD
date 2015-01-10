@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
-//#include "mpi.h"
+#include "mpi.h"
 
 #include "helpers.h"
 #include "messages.h"
+#include "routing.h"
 
 FILE *messagesOutputFile = NULL;
-FILE *logFile = NULL;
 // OK
 Message *deserializeMessage(char *line) {
     int source, destination;
@@ -64,32 +64,15 @@ Message *createBroadcastMessage(int pid, MessageType messageType) {
     return message;
 }
 
-// OK
-void broadcastMessage(RoutingTable routingTable, Message *message, int tag, int source) {
-    MPI_Request reqs[routingTable.count]; 
-    int i;
-    for (i = 0; i < routingTable.count; i++) {
-        if (bunkerIsNeighbour(routingTable.bunkers[i]) && routingTable.bunkers[i].nextHop != source) {
-            fprintf(logFile, "%d sending start broadcast to %d\n", message->source, routingTable.bunkers[i].nextHop);
-            MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &reqs[i]);
-        } 
-    }
-}
-
 void sendStartingBroadcast(RoutingTable routingTable, int pid, MessageArray messageArray) {
     Message *message;
     
-    char name[20];
-    sprintf(name, "logfile %d", pid);
-    logFile = fopen(name, "a");
-   
     if (messageArray.count == 0) {
         message = createBroadcastMessage(pid, BROADCAST_NONE);
     } else {
         message = createBroadcastMessage(pid, BROADCAST_START);
     }
    
-    fprintf(logFile, "%d is sending initial broadcast\n");
     broadcastMessage(routingTable, message, START_COMMUNICATION_TAG, UNKNOWN_BUNKER);
 }
 
@@ -128,11 +111,11 @@ void receiveStartingBroadcasts(int *communicatingBunkers, RoutingTable routingTa
         Message *receivedMessage = (Message *)calloc(1, sizeof(Message));
         MPI_Recv(receivedMessage, 1, MPI_MESSAGE, MPI_ANY_SOURCE, START_COMMUNICATION_TAG, MPI_COMM_WORLD, &sts);
         int source = sts.MPI_SOURCE;
-        
+
         interpretReceivedBroadcast(receivedMessage, communicatingBunkers);
         routeMessage(routingTable, receivedMessage, START_COMMUNICATION_TAG, source);
         
-        if (doneReceivingBroadcasts(communicatingBunkers, routingTable.count)) {
+        if (doneReceivingBroadcasts(communicatingBunkers, routingTable.count + 1)) {
             phaseComplete = TRUE;
         }
     }
@@ -147,7 +130,7 @@ void sendMessages(RoutingTable routingTable, MessageArray messagesArray, int pid
     MPI_Request reqs[messagesArray.count];
     int i;
     for (i = 0; i < messagesArray.count; i++) {
-       routeMessage(routingTable, messagesArray.messages[i], COMMUNICATION_TAG);
+       routeMessage(routingTable, messagesArray.messages[i], COMMUNICATION_TAG, pid);
     }
 }
 
@@ -184,14 +167,15 @@ void didReceiveMessage(Message *message, int *communicatingBunkers, int pid, int
 }
 
 void receiveMessages(RoutingTable routingTable, int *communicatingBunkers, int pid) {
-    while (hasMoreMessages(communicatingBunkers, routingTable.count)) {
+    while (hasMoreMessages(communicatingBunkers, routingTable.count + 1)) {
         Message *receivedMessage = (Message *)calloc(1, sizeof(Message));
         MPI_Status sts;
         MPI_Recv(receivedMessage, 1, MPI_MESSAGE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &sts);
         int source = sts.MPI_SOURCE;
+        int tag = sts.MPI_TAG;
         didReceiveMessage(receivedMessage, communicatingBunkers, pid, source);
         if (receivedMessage->destination != pid) {
-            routeMessage(receivedMessage);
+            routeMessage(routingTable, receivedMessage, tag, source);
         } else {
             free(receivedMessage);
         }

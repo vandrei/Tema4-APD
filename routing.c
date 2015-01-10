@@ -247,15 +247,19 @@ int countNeighbours(RoutingTable routingTable) {
     return count;
 }
 
-void routeMessage(RoutingTable routingTable, Message *message, int tag) {
+void broadcastMessage(RoutingTable routingTable, Message *message, int tag, int source) {
+    MPI_Request reqs[routingTable.count]; 
+    int i;
+    for (i = 0; i < routingTable.count; i++) {
+        if (bunkerIsNeighbour(routingTable.bunkers[i]) && routingTable.bunkers[i].nextHop != source) {
+            MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &reqs[i]);
+        } 
+    }
+}
+
+void routeMessage(RoutingTable routingTable, Message *message, int tag, int source) {
     if (message->destination == BROADCAST_DESTINATION) {
-        MPI_Request reqs[routingTable.count];
-        int i;
-        for (i = 0; i <  routingTable.count; i++) {
-            if (bunkerIsNeighbour(routingTable.bunkers[i])) {
-                MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &reqs[i]);
-            }
-        }
+        broadcastMessage(routingTable, message, tag, source);
     } else {
         BOOL foundDestination = FALSE;
 

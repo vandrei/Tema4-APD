@@ -61,7 +61,7 @@ int main (int argc, char **argv) {
             receiveTopology(&routingTable, pid);
         }
 
-        communicatingBunkers = (int *)calloc(routingTable.count, sizeof(int));
+        communicatingBunkers = (int *)calloc(routingTable.count + 1, sizeof(int));
 
         printRoutingTable(routingTable, pid);
         
@@ -70,25 +70,11 @@ int main (int argc, char **argv) {
 
 
     // ok until here
-    //
 // begin phase 2
      
-        //int *children;
-        //children = (int *)calloc(routingTable->count, sizeof(int));  
-        
         sendStartingBroadcast(routingTable, pid, messageArray);
         receiveStartingBroadcasts(communicatingBunkers, routingTable, pid);
 
-        char name[20];
-        sprintf(name, "file %d", pid);
-        FILE *f = fopen(name, "w");
-
-        int i;
-        for (i = 0; i < routingTable.count; i++) {
-            fprintf(f, "%d - %d\n", i, communicatingBunkers[i]);
-        }
-
-        fclose(f);
 //        sendMessages(routingTable, &messageArray);
   //      sendEndingBroadcast(routingTable, pid);
         
