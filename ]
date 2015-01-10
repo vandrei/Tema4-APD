@@ -169,22 +169,22 @@ void didReceiveMessage(Message *message, int *communicatingBunkers, int pid, int
         }
 
        if (message->type == BROADCAST_STOP) {
-           printf("%0.2d received DONE broadcast from source %d. Received it from bunker %d. Broadcasting it to all of my children. \n", pid, message->source, source);
+  //         printf("%0.2d received DONE broadcast from source %d. Received it from bunker %d. Broadcasting it to all of my children. \n", pid, message->source, source);
        } else {
-           printf("%0.2d I received a message from %d. Original source: %d, Content: %s\n", pid, source, message->source, message->message);
-       } 
-       
-    } else {
-        int destinationBunker;
-        int i;
-        for (i = 0; i < routingTable.count; i++) {
-            if (message->destination == routingTable.bunkers[i].nodeId) {
-                destinationBunker = routingTable.bunkers[i].nextHop;
-                break;
-            }
-        }
-        printf("%0.2d received a message from source %d to destination %d. Received it from bunker %d. Sending it to %d.\n", pid, message->source, message->destination, source, destinationBunker);
+           int destinationBunker;
+           int i;
+           for (i = 0; i < routingTable.count; i++) {
+               printf("%0.2d %d != %d\n", message->destination, routingTable.bunkers[i].nodeId);
+               if (message->destination == routingTable.bunkers[i].nodeId) {
+                   printf("found dest!\n");
+                   destinationBunker = routingTable.bunkers[i].nextHop;
+                   break;
+               }
+           }
+//               printf("%0.2d received a message from source %d to destination %d. Received it from bunker %d. Sending it to %d.\n", pid, message->source, message->destination, source, destinationBunker);
+       }
     }
+
 }
 
 // OK

@@ -235,6 +235,7 @@ void requestSTP(RoutingTable *routingTable, int pid) {
     }
 }
 
+// OK
 int countNeighbours(RoutingTable routingTable) {
     int i;
     int count;
@@ -247,6 +248,7 @@ int countNeighbours(RoutingTable routingTable) {
     return count;
 }
 
+// OK
 void broadcastMessage(RoutingTable routingTable, Message *message, int tag, int source) {
     MPI_Request reqs[routingTable.count]; 
     int i;
@@ -257,6 +259,7 @@ void broadcastMessage(RoutingTable routingTable, Message *message, int tag, int 
     }
 }
 
+// OK
 void routeMessage(RoutingTable routingTable, Message *message, int tag, int source) {
     if (message->destination == BROADCAST_DESTINATION) {
         broadcastMessage(routingTable, message, tag, source);
@@ -272,11 +275,8 @@ void routeMessage(RoutingTable routingTable, Message *message, int tag, int sour
             }
         }
        
-        printf("%d found destination: %d -> %d : %s\n", source, foundDestination, message->destination, message->message);
-         
         if (foundDestination) {
             MPI_Request req;
-            printf("%d sending message to %d\n", source, message->destination);
             MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &req);
         }
     }

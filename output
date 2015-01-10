@@ -1,0 +1,172 @@
+04 received DONE broadcast from source 1. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 1. Received it from bunker 1. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 1. Received it from bunker 1. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 4. Received it from bunker 4. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 1. Received it from bunker 4. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 0. Received it from bunker 1. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 4. Received it from bunker 1. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 0. Received it from bunker 4. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 5. Received it from bunker 4. Broadcasting it to all of my children. 
+04 received a message from source 9 to destination 1. Received it from bunker 9. Sending it to 1.
+04 received DONE broadcast from source 9. Received it from bunker 9. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 0. Received it from bunker 1. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 5. Received it from bunker 1. Broadcasting it to all of my children. 
+01 received DONE broadcast from source 0. Received it from bunker 0. Broadcasting it to all of my children. 
+01 received a message from source 4 to destination 2. Received it from bunker 4. Sending it to 0.
+01 received DONE broadcast from source 4. Received it from bunker 4. Broadcasting it to all of my children. 
+01 received a message from source 5 to destination 8. Received it from bunker 5. Sending it to 0.
+01 received DONE broadcast from source 5. Received it from bunker 5. Broadcasting it to all of my children. 
+01 I received a message from 4. Original source: 9, Content: Mesaj trimis
+
+01 received DONE broadcast from source 9. Received it from bunker 4. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 9. Received it from bunker 1. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 6. Received it from bunker 4. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 10. Received it from bunker 4. Broadcasting it to all of my children. 
+09 I received a message from 4. Original source: 3, Content: Mesaj de broadcast
+
+09 received DONE broadcast from source 3. Received it from bunker 4. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 2. Received it from bunker 4. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 6. Received it from bunker 1. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 10. Received it from bunker 10. Broadcasting it to all of my children. 
+04 I received a message from 1. Original source: 3, Content: Mesaj de broadcast
+
+04 received DONE broadcast from source 3. Received it from bunker 1. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 2. Received it from bunker 1. Broadcasting it to all of my children. 
+04 received a message from source 7 to destination 9. Received it from bunker 1. Sending it to 9.
+04 received DONE broadcast from source 7. Received it from bunker 1. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 0. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 1. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received a message from source 7 to destination 9. Received it from bunker 7. Sending it to 0.
+02 received DONE broadcast from source 7. Received it from bunker 7. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 8. Received it from bunker 8. Broadcasting it to all of my children. 
+02 I received a message from 0. Original source: 4, Content: Salut...
+
+02 received DONE broadcast from source 4. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received a message from source 5 to destination 8. Received it from bunker 0. Sending it to 8.
+02 received DONE broadcast from source 5. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 9. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 6. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 10. Received it from bunker 0. Broadcasting it to all of my children. 
+02 I received a message from 0. Original source: 3, Content: Mesaj de broadcast
+
+02 received DONE broadcast from source 3. Received it from bunker 0. Broadcasting it to all of my children. 
+02 received DONE broadcast from source 11. Received it from bunker 8. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 1. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 0. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 4. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 5. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 9. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 6. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 10. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received a message from source 4 to destination 2. Received it from bunker 1. Sending it to 2.
+00 received DONE broadcast from source 4. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received a message from source 5 to destination 8. Received it from bunker 1. Sending it to 2.
+00 received DONE broadcast from source 5. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 9. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 6. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 10. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 2. Received it from bunker 2. Broadcasting it to all of my children. 
+00 received a message from source 7 to destination 9. Received it from bunker 2. Sending it to 1.
+00 received DONE broadcast from source 7. Received it from bunker 2. Broadcasting it to all of my children. 
+00 I received a message from 1. Original source: 3, Content: Mesaj de broadcast
+
+00 received DONE broadcast from source 3. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 1. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 0. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 4. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 5. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 9. Received it from bunker 1. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 2. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 0. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 1. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 8. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 4. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 5. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 9. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 6. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 10. Received it from bunker 2. Broadcasting it to all of my children. 
+07 I received a message from 2. Original source: 3, Content: Mesaj de broadcast
+
+07 received DONE broadcast from source 3. Received it from bunker 2. Broadcasting it to all of my children. 
+07 received DONE broadcast from source 11. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 2. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 0. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 1. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 7. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 11. Received it from bunker 11. Broadcasting it to all of my children. 
+01 received DONE broadcast from source 6. Received it from bunker 6. Broadcasting it to all of my children. 
+01 received DONE broadcast from source 10. Received it from bunker 4. Broadcasting it to all of my children. 
+01 I received a message from 3. Original source: 3, Content: Mesaj de broadcast
+
+01 received DONE broadcast from source 3. Received it from bunker 3. Broadcasting it to all of my children. 
+01 received DONE broadcast from source 2. Received it from bunker 0. Broadcasting it to all of my children. 
+01 received a message from source 7 to destination 9. Received it from bunker 0. Sending it to 4.
+01 received DONE broadcast from source 7. Received it from bunker 0. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 4. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 1. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 9. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 0. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 5. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 6. Received it from bunker 4. Broadcasting it to all of my children. 
+10 I received a message from 4. Original source: 3, Content: Mesaj de broadcast
+
+10 received DONE broadcast from source 3. Received it from bunker 4. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 8. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 2. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 0. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 1. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 7. Received it from bunker 8. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 6. Received it from bunker 1. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 10. Received it from bunker 1. Broadcasting it to all of my children. 
+05 I received a message from 1. Original source: 3, Content: Mesaj de broadcast
+
+05 received DONE broadcast from source 3. Received it from bunker 1. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 2. Received it from bunker 1. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 7. Received it from bunker 1. Broadcasting it to all of my children. 
+09 I received a message from 4. Original source: 7, Content: Buna ziua!
+
+09 received DONE broadcast from source 7. Received it from bunker 4. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 4. Received it from bunker 2. Broadcasting it to all of my children. 
+08 I received a message from 2. Original source: 5, Content: Alt mesaj
+
+08 received DONE broadcast from source 5. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 9. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 6. Received it from bunker 2. Broadcasting it to all of my children. 
+08 received DONE broadcast from source 10. Received it from bunker 2. Broadcasting it to all of my children. 
+08 I received a message from 2. Original source: 3, Content: Mesaj de broadcast
+
+08 received DONE broadcast from source 3. Received it from bunker 2. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 2. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 7. Received it from bunker 4. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 4. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 5. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 9. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 6. Received it from bunker 8. Broadcasting it to all of my children. 
+11 received DONE broadcast from source 10. Received it from bunker 8. Broadcasting it to all of my children. 
+11 I received a message from 8. Original source: 3, Content: Mesaj de broadcast
+
+11 received DONE broadcast from source 3. Received it from bunker 8. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 2. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 7. Received it from bunker 1. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 8. Received it from bunker 2. Broadcasting it to all of my children. 
+00 received DONE broadcast from source 11. Received it from bunker 2. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 10. Received it from bunker 1. Broadcasting it to all of my children. 
+06 I received a message from 1. Original source: 3, Content: Mesaj de broadcast
+
+06 received DONE broadcast from source 3. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 2. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 7. Received it from bunker 1. Broadcasting it to all of my children. 
+01 received DONE broadcast from source 8. Received it from bunker 0. Broadcasting it to all of my children. 
+01 received DONE broadcast from source 11. Received it from bunker 0. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 8. Received it from bunker 1. Broadcasting it to all of my children. 
+05 received DONE broadcast from source 11. Received it from bunker 1. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 8. Received it from bunker 1. Broadcasting it to all of my children. 
+04 received DONE broadcast from source 11. Received it from bunker 1. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 8. Received it from bunker 4. Broadcasting it to all of my children. 
+09 received DONE broadcast from source 11. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 8. Received it from bunker 4. Broadcasting it to all of my children. 
+10 received DONE broadcast from source 11. Received it from bunker 4. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 8. Received it from bunker 1. Broadcasting it to all of my children. 
+03 received DONE broadcast from source 11. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 8. Received it from bunker 1. Broadcasting it to all of my children. 
+06 received DONE broadcast from source 11. Received it from bunker 1. Broadcasting it to all of my children. 

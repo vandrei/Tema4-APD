@@ -66,12 +66,8 @@ int main (int argc, char **argv) {
         printRoutingTable(routingTable, pid);
         
         readMessages(messagesFile, &messageArray, pid);
-        printMessages(&messageArray, pid);
+        //printMessages(&messageArray, pid);
 
-
-    // ok until here
-// begin phase 2
-     
         sendStartingBroadcast(routingTable, pid, messageArray);
         receiveStartingBroadcasts(communicatingBunkers, routingTable, pid);
 
@@ -79,6 +75,8 @@ int main (int argc, char **argv) {
         sendEndingBroadcast(routingTable, pid);
         
         receiveMessages(routingTable, communicatingBunkers, pid);
+
+        // phase 2 complete
 
     MPI_Finalize();
 
