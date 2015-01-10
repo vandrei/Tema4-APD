@@ -12,7 +12,11 @@ FILE *messagesOutputFile = NULL;
 // OK
 Message *deserializeMessage(char *line) {
     int source, destination;
-    sscanf(line, "%d %d", &source, &destination);
+    sscanf(line, "%d %c", &source, &destination);
+
+    if (destination != BROADCAST_DESTINATION) {
+        sscanf(line, "%*d %d", &destination);
+    }
 
     char *message = strchr(line, ' ') + 1;
     message = strchr(message, ' ') + 1;
@@ -126,11 +130,11 @@ void sendEndingBroadcast(RoutingTable routingTable, int pid) {
     broadcastMessage(routingTable, message, END_COMMUNICATION_TAG, UNKNOWN_BUNKER);
 }
 
-void sendMessages(RoutingTable routingTable, MessageArray messagesArray, int pid) {
-    MPI_Request reqs[messagesArray.count];
+void sendMessages(RoutingTable routingTable, MessageArray *messagesArray, int pid) {
     int i;
-    for (i = 0; i < messagesArray.count; i++) {
-       routeMessage(routingTable, messagesArray.messages[i], COMMUNICATION_TAG, pid);
+    //printf("%d messageCount = %d\n", pid, messagesArray->count);
+    for (i = 0; i < messagesArray->count; i++) {
+       routeMessage(routingTable, messagesArray->messages[i], COMMUNICATION_TAG, pid);
     }
 }
 
@@ -147,21 +151,22 @@ BOOL hasMoreMessages(int *communicatingBunkers, int count) {
 
 void didReceiveMessage(Message *message, int *communicatingBunkers, int pid, int source) {
     // print details in file
-// TODO resulting output!
+// TODO resulting output
 
     if (message->destination == pid ||
         message->destination == BROADCAST_DESTINATION) {
 
         if (message->type == BROADCAST_STOP) {
-            communicatingBunkers[message->destination] = DONE;
+            communicatingBunkers[message->source] = DONE;
         }
 
         if (messagesOutputFile == NULL) {
             char name[20];
             sprintf(name, "receivedMessages - %d", pid);
             messagesOutputFile = fopen(name, "w");
-            fprintf(messagesOutputFile, "%d received from source %d through %d message: %s\n", pid, message->source, source, message->message);
         }
+        
+        fprintf(messagesOutputFile, "%d received from source %d through %d message: %s\n", pid, message->source, source, message->message);
     }
 
 }
@@ -173,6 +178,7 @@ void receiveMessages(RoutingTable routingTable, int *communicatingBunkers, int p
         MPI_Recv(receivedMessage, 1, MPI_MESSAGE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &sts);
         int source = sts.MPI_SOURCE;
         int tag = sts.MPI_TAG;
+        //printf("%0.2d received message from %d\n", pid, receivedMessage->source);
         didReceiveMessage(receivedMessage, communicatingBunkers, pid, source);
         if (receivedMessage->destination != pid) {
             routeMessage(routingTable, receivedMessage, tag, source);

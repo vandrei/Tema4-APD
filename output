@@ -1,0 +1,42 @@
+9 found destination: 1 -> 1 : Mesaj trimis
+
+9 sending message to 1
+4 found destination: 1 -> 2 : Salut...
+
+4 sending message to 2
+9 found destination: 1 -> 1 : Mesaj trimis
+
+9 sending message to 1
+4 found destination: 1 -> 2 : Salut...
+
+4 sending message to 2
+5 found destination: 1 -> 8 : Alt mesaj
+
+5 sending message to 8
+7 found destination: 1 -> 9 : Buna ziua!
+
+7 sending message to 9
+1 found destination: 1 -> 2 : Salut...
+
+1 sending message to 2
+2 found destination: 1 -> 9 : Buna ziua!
+
+2 sending message to 9
+7 found destination: 1 -> 9 : Buna ziua!
+
+7 sending message to 9
+5 found destination: 1 -> 8 : Alt mesaj
+
+5 sending message to 8
+1 found destination: 1 -> 8 : Alt mesaj
+
+1 sending message to 8
+0 found destination: 1 -> 9 : Buna ziua!
+
+0 sending message to 9
+0 found destination: 1 -> 8 : Alt mesaj
+
+0 sending message to 8
+1 found destination: 1 -> 9 : Buna ziua!
+
+1 sending message to 9

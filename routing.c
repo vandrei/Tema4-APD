@@ -263,7 +263,7 @@ void routeMessage(RoutingTable routingTable, Message *message, int tag, int sour
     } else {
         BOOL foundDestination = FALSE;
 
-        int i;
+        int i = 0;
         while (i < routingTable.count && !foundDestination) {
             if (routingTable.bunkers[i].nodeId == message->destination) {
                 foundDestination = TRUE;
@@ -271,9 +271,12 @@ void routeMessage(RoutingTable routingTable, Message *message, int tag, int sour
                 i++;
             }
         }
-        
+       
+        printf("%d found destination: %d -> %d : %s\n", source, foundDestination, message->destination, message->message);
+         
         if (foundDestination) {
             MPI_Request req;
+            printf("%d sending message to %d\n", source, message->destination);
             MPI_Isend(message, 1, MPI_MESSAGE, routingTable.bunkers[i].nextHop, tag, MPI_COMM_WORLD, &req);
         }
     }

@@ -66,7 +66,7 @@ int main (int argc, char **argv) {
         printRoutingTable(routingTable, pid);
         
         readMessages(messagesFile, &messageArray, pid);
-        //printMessages(&messageArray, pid);
+        printMessages(&messageArray, pid);
 
 
     // ok until here
@@ -75,10 +75,10 @@ int main (int argc, char **argv) {
         sendStartingBroadcast(routingTable, pid, messageArray);
         receiveStartingBroadcasts(communicatingBunkers, routingTable, pid);
 
-//        sendMessages(routingTable, &messageArray);
-  //      sendEndingBroadcast(routingTable, pid);
+        sendMessages(routingTable, &messageArray, pid);
+        sendEndingBroadcast(routingTable, pid);
         
-    //    receiveMessages(routingTable, &communicatingBunkers, pid);
+        receiveMessages(routingTable, communicatingBunkers, pid);
 
     MPI_Finalize();
 
